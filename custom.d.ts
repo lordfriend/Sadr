@@ -1,0 +1,1 @@
+declare var ALBIREO_HOST: any;

@@ -1,0 +1,22 @@
+{
+  "manifest_version": 2,
+  "name": "Deneb Social",
+  "description": "Add some social elements to Deneb",
+  "version": "1.0",
+  "background": {
+    "scripts": ["backend.js"],
+    "persistent": false
+  },
+  "externally_connectable": {
+    "matches": ["http://localhost:3000/*"]
+  },
+  "permissions": [
+    "cookies",
+    "https://bangumi.tv/*",
+    "https://bgm.tv/*",
+    "https://api.bgm.tv/*",
+    "http://localhost:3000/*",
+    "storage",
+    "tabs"
+  ]
+}
