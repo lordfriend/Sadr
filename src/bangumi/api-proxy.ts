@@ -65,6 +65,9 @@ export class BangumiAPIProxy {
         return fetch(`${this._host}/auth?source=onAir`, {
             method: 'POST',
             headers: {
+                'Cache-Control': 'no-cache, no-store, must-revalidate',
+                'Pragma': 'no-cache',
+                'Expires': '0',
                 'Content-Type': 'application/x-www-form-urlencoded'
             },
             body: params.toString()
@@ -119,6 +122,11 @@ export class BangumiAPIProxy {
             .then(() => {
                 const reqUrl = `${this._host}/collection/${bangumi_id}?${searchParams.toString()}`;
                 return fetch(reqUrl, {
+                    headers: {
+                        'Cache-Control': 'no-cache, no-store, must-revalidate',
+                        'Pragma': 'no-cache',
+                        'Expires': '0'
+                    },
                     credentials: 'include'
                 })
                     .then(resp => resp.json())
@@ -145,6 +153,11 @@ export class BangumiAPIProxy {
         return this.addCredentialParams(searchParams)
             .then(authInfo => {
                 return fetch(`${this._host}/user/${(authInfo as IAuthInfo).id}/collection?${searchParams.toString()}`, {
+                    headers: {
+                        'Cache-Control': 'no-cache, no-store, must-revalidate',
+                        'Pragma': 'no-cache',
+                        'Expires': '0',
+                    },
                     credentials: 'include'
                 });
             })
@@ -165,6 +178,9 @@ export class BangumiAPIProxy {
                     return fetch(`${this._host}/collect/${bangumi_id}/update?source=onAir`, {
                         method: 'POST',
                         headers: {
+                            'Cache-Control': 'no-cache, no-store, must-revalidate',
+                            'Pragma': 'no-cache',
+                            'Expires': '0',
                             'Content-Type': 'application/x-www-form-urlencoded'
                         },
                         body: searchParams.toString(),
@@ -188,6 +204,9 @@ export class BangumiAPIProxy {
                 return fetch(`${this._host}/ep/${episodeId}/status/${status}?source=onAir`, {
                     method: 'POST',
                     headers: {
+                        'Cache-Control': 'no-cache, no-store, must-revalidate',
+                        'Pragma': 'no-cache',
+                        'Expires': '0',
                         'Content-Type': 'application/x-www-form-urlencoded'
                     },
                     body: searchParams.toString(),
@@ -203,7 +222,14 @@ export class BangumiAPIProxy {
         searchParams.set('source', 'onAir');
         return this.addCredentialParams(searchParams)
             .then((authInfo) => {
-                return fetch(`${this._host}/user/${(authInfo as IAuthInfo).id}/progress?${searchParams.toString()}`)
+                return fetch(`${this._host}/user/${(authInfo as IAuthInfo).id}/progress?${searchParams.toString()}`, {
+                    headers: {
+                        'Cache-Control': 'no-cache, no-store, must-revalidate',
+                        'Pragma': 'no-cache',
+                        'Expires': '0'
+                    },
+                    credentials: 'include'
+                })
             })
             .then(res => res.json())
             .then(result => {
