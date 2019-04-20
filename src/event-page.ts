@@ -11,7 +11,7 @@ import 'rxjs/add/observable/fromEvent';
 import 'rxjs/add/observable/throw';
 import { injectable } from 'inversify';
 import { container, Export, invokeRPC, Remote, resolveAllRemote } from './utils/rpc';
-import { RPCMessage } from './utils/message';
+import { RPCMessage, RPCResult } from './utils/message';
 import './bangumi/api-proxy';
 import './bangumi/web-proxy';
 import './bangumi/synchronize';
@@ -49,7 +49,7 @@ export class BackgroundCore {
                             urlChanged = true;
                         }
                         if (tabId === openedTab.id && urlChanged && changeInfo.status === 'complete') {
-                            chrome.tabs.executeScript(tabId, {file: 'content.js'}, (results) => {
+                            chrome.tabs.executeScript(tabId, {file: '/content.js'}, (results) => {
                                 console.log(results);
                                 if (results && results.length > 0 && results[0] === true) {
                                     setTimeout(() => {
@@ -75,6 +75,9 @@ container.bind<BrowserStorage>(TYPES.BrowserStorage).to(ChromeStore);
 
 resolveAllRemote();
 
+/**
+ * @Deprecated this is the old method only supported by Chrome. will be removed at the next version.
+ */
 chrome.runtime.onMessageExternal.addListener(function (message: RPCMessage, sender, sendResponse) {
     invokeRPC(message)
         .then((result: any) => {
@@ -82,6 +85,26 @@ chrome.runtime.onMessageExternal.addListener(function (message: RPCMessage, send
         }, (error: any) => {
             console.log(error);
             sendResponse({error: error, result: null});
+        });
+    return true;
+});
+
+chrome.runtime.onMessage.addListener(function (message: RPCMessage, sender, sendResponse) {
+    let resultMessage = {
+        messageId: message.id,
+        extensionId: message.extensionId,
+        type: 'SADR_FROM_EXT',
+        error: null,
+        result: null
+    } as RPCResult;
+    invokeRPC(message)
+        .then((result: any) => {
+            resultMessage.result = result;
+            sendResponse(resultMessage);
+        }, (error: any) => {
+            resultMessage.error = error;
+            console.log(error);
+            sendResponse(resultMessage);
         });
     return true;
 });

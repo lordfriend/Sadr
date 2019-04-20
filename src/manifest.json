@@ -2,11 +2,18 @@
   "manifest_version": 2,
   "name": "Deneb Social",
   "description": "Add some social elements to Deneb",
-  "version": "1.1",
+  "version": "1.2",
   "background": {
     "scripts": ["backend.js"],
     "persistent": false
   },
+  "content_scripts": [
+    {
+      "matches": ["http://localhost:3000/*"],
+      "run_at": "document_start",
+      "js": ["bridge.js"]
+    }
+  ],
   "externally_connectable": {
     "matches": ["http://localhost:3000/*"]
   },

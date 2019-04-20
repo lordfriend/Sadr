@@ -1,6 +1,6 @@
 This is a browser extension project for [Deneb](https://github.com/lordfriend/Deneb). It must work with Deneb 3.0.0 and above together to get work.
 
-Currently only support Chrome, other browser extensions are planned.
+Currently support Chrome, Firefox and Edge.
 
 ## Overview
 
@@ -8,6 +8,8 @@ This project add some magic bridge between Deneb and bgm.tv, which allow Deneb p
 using a bgm.tv account.
 
 ## Development
+
+Require Nodejs >= v8.5
 
 1. Clone this project
 
