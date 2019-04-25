@@ -3,12 +3,14 @@ const path = require('path');
 const DefinePlugin = require('webpack/lib/DefinePlugin');
 const { CheckerPlugin } = require('awesome-typescript-loader');
 const CopyWebpckPlugin = require('copy-webpack-plugin');
+const manifestTransform = require('./scripts/transform');
 
 const env = require('./env');
 
 let isProd = process.env.NODE_ENV === 'production';
 let albireo_host = isProd ? env.prod.albireo_host : env.dev.albireo_host;
 let watch = !isProd;
+let browserType = process.env.BROWSER_TYPE || 'Chrome';
 
 module.exports = {
     watch: watch,
@@ -37,7 +39,14 @@ module.exports = {
         new CopyWebpckPlugin([
             {
                 from: 'src',
-                ignore: ['*.ts']
+                ignore: ['*.ts'],
+                transform: (content, filePath) => {
+                    if (path.basename(filePath) === 'manifest.json') {
+                        return manifestTransform(content, browserType, isProd);
+                    } else {
+                        return content;
+                    }
+                }
             }
         ]),
         new DefinePlugin({

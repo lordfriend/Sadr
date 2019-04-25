@@ -2,26 +2,31 @@
   "manifest_version": 2,
   "name": "Deneb Social",
   "description": "Add some social elements to Deneb",
-  "version": "1.2",
+  "version": "1.3",
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "sadr@example.com"
+    }
+  },
   "background": {
     "scripts": ["backend.js"],
     "persistent": false
   },
   "content_scripts": [
     {
-      "matches": ["http://localhost:3000/*"],
+      "matches": ["http://localhost/*"],
       "run_at": "document_start",
       "js": ["bridge.js"]
     }
   ],
   "externally_connectable": {
-    "matches": ["http://localhost:3000/*"]
+    "matches": ["http://localhost/*"]
   },
   "permissions": [
     "cookies",
     "https://bgm.tv/*",
     "https://api.bgm.tv/*",
-    "http://localhost:3000/*",
+    "http://localhost/*",
     "storage",
     "tabs"
   ]

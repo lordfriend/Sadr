@@ -5,10 +5,13 @@
   "main": "event-page.js",
   "scripts": {
     "clean": "npm run rimraf -- dist",
-    "build:prod": "npm run clean && NODE_ENV=production webpack --config webpack.config.js && node ./scripts/manifest-process.js",
-    "build:dev": "webpack --config webpack.config.js",
+    "build:prod": "npm run clean && NODE_ENV=production BROWSER_TYPE=Chrome webpack --config webpack.config.js",
+    "build:prod:firefox": "npm run clean && NODE_ENV=production BROWSER_TYPE=Firefox webpack --config webpack.config.js",
+    "build:dev": "BROWSER_TYPE=Chrome webpack --config webpack.config.js",
+    "build:dev:firefox": "BROWSER_TYPE=Firefox webpack --config webpack.config.js",
     "rimraf": "rimraf",
     "start": "npm run clean && npm run build:dev",
+    "start:firefox": "npm run clean && npm run build:dev:firefox",
     "test": "echo \"Error: no test specified\" && exit 1",
     "webpack": "webpack"
   },
