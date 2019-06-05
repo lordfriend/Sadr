@@ -28,6 +28,7 @@ module.exports = function (manifest, browserType, isProd) {
             manifestObj.externally_connectable.matches = [`${env.prod.albireo_host}/*`];
         } else {
             manifestObj.browser_specific_settings.gecko.id = `${env.prod.extension_id}`;
+            manifestObj.browser_specific_settings.gecko.update_url = `${env.prod.firefox_update_link}`;
         }
     }
 

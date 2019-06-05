@@ -29,3 +29,13 @@ check the **Enable add-on debugging**, then click Load Temporary Add-on. Choose 
 5. publish your own extension to Chrome Webstore and Firefox AMO
 
 run `build.sh` will build all extensions to zip files. upload your extension to each browser's distribution platform.
+
+Note for Firefox extension: Due to Albireo service is private and AMO policy, you need self-distribute your extension. the building script
+will help you generate an proper update manifest. you need create the following files in order to work with `build.sh` script
+
+1. copy and modify `sign-env.example.sh`, rename it to sign-env.sh. the environment variable will be used by `web-ext` to sign the extension
+you need visit your [Developer Hub at AMO](https://addons.mozilla.org/en-US/developers/addon/api/key/) to acquire `api key` and `api secret`
+
+2. setup your static file server, and make sure your can access static file via the `firefox_update_link` in the env.js prod section.
+
+3. After run build.sh, upload your update.json and newest built firefox extension zip file resided in the web-ext-artifacts directory.
