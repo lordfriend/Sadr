@@ -15,7 +15,7 @@ Require Nodejs >= v8.5
 
 2. `yarn install`
 
-3. rename `env.example.js` to `env.js`, change some values in the object of this file, with your domain and site name.
+4. Set the Environment Variables used in env.js or use the default value.
 
 4. development
 
