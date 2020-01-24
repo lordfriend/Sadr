@@ -3,7 +3,6 @@ dist
 node_modules
 web-ext-artifacts
 
-env.js
 sign-env.sh
 chrome.zip
 yarn-error.log
