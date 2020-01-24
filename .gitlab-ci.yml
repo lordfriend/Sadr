@@ -8,7 +8,7 @@ build_signed:
       - artifacts
   script:
     - yarn install
-    - build.sh
+    - ./build.sh
     - mkdir artifacts
     - cp ./updates.json ./artifacts/
     - cp ./web-ext-artifacts/*.xpi ./artifacts/
