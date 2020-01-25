@@ -7,8 +7,8 @@ build_signed:
     paths:
       - artifacts
   script:
-    - echo $ENV_JS > $(pwd)/env.js
-    - echo $SIGN_ENV_SH > $(pwd)/sign-env.sh
+    - cp $ENV_JS $(pwd)/env.js
+    - cp $SIGN_ENV_SH $(pwd)/sign-env.sh
     - yarn install
     - ./build.sh
     - mkdir artifacts
