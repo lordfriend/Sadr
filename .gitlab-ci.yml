@@ -1,0 +1,14 @@
+image: "node:alpine"
+build_signed:
+  only:
+    refs:
+      - master
+  artifacts:
+    paths:
+      - artifacts
+  script:
+    - yarn install
+    - ./build.sh
+    - mkdir artifacts
+    - cp ./updates.json ./artifacts/
+    - cp ./web-ext-artifacts/*.xpi ./artifacts/
