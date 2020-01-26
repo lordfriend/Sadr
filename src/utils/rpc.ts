@@ -18,7 +18,7 @@ const instanceRegistry = new Map<string, any>();
  * @constructor
  */
 export function Export() {
-    return function <T>(target: T, propertyKey: string, descriptor: TypedPropertyDescriptor<any>): TypedPropertyDescriptor<any> {
+    return function <T extends Function>(target: T, propertyKey: string, descriptor: TypedPropertyDescriptor<any>): TypedPropertyDescriptor<any> {
         const targetConstructor = target.constructor as classType<T>;
         let className = targetConstructor.name;
         if (!registry.has(className)) {

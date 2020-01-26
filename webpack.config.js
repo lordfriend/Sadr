@@ -1,7 +1,7 @@
 const path = require('path');
 
 const DefinePlugin = require('webpack/lib/DefinePlugin');
-const { CheckerPlugin } = require('awesome-typescript-loader');
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const CopyWebpckPlugin = require('copy-webpack-plugin');
 const manifestTransform = require('./scripts/transform');
 
@@ -30,12 +30,15 @@ module.exports = {
         rules: [
             {
                 test: /\.ts$/,
-                loader: 'awesome-typescript-loader'
+                loader: 'ts-loader',
+                options: {
+                    transpileOnly: true
+                }
             }
         ]
     },
     plugins: [
-        new CheckerPlugin(),
+        new ForkTsCheckerWebpackPlugin(),
         new CopyWebpckPlugin([
             {
                 from: 'src',
