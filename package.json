@@ -1,6 +1,6 @@
 {
   "name": "sadr",
-  "version": "1.5.1",
+  "version": "1.5.2",
   "description": "A Chrome extension for Deneb, it enhances some ability for social",
   "main": "event-page.js",
   "scripts": {
