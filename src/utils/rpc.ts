@@ -18,8 +18,9 @@ const instanceRegistry = new Map<string, any>();
  * @constructor
  */
 export function Export() {
-    return function <T extends Function>(target: T, propertyKey: string, descriptor: TypedPropertyDescriptor<any>): TypedPropertyDescriptor<any> {
+    return function <T extends any>(target: T, propertyKey: string, descriptor: TypedPropertyDescriptor<any>): TypedPropertyDescriptor<any> {
         const targetConstructor = target.constructor as classType<T>;
+        console.log(target.constructor.name);
         let className = targetConstructor.name;
         if (!registry.has(className)) {
             registry.set(className, []);
@@ -38,6 +39,7 @@ export function Export() {
 export function Remote() {
     return function <T>(target: classType<T>): classType<T> {
         const className = target.name;
+        console.log('remote', className);
         container.bind(target).toSelf().inSingletonScope();
         classRegistry.set(className, target);
         return target;

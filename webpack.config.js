@@ -37,6 +37,9 @@ module.exports = {
             }
         ]
     },
+    optimization: {
+        minimize: false
+    },
     plugins: [
         new ForkTsCheckerWebpackPlugin(),
         new CopyWebpckPlugin([
